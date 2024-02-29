@@ -187,10 +187,14 @@ app.get("/api/details", (req, res) => {
     res.json(Details)
 })
 
-app.get()//sam
-app.post()//tamilmani
-app.put()//kowsalya
-app.delete()//thirumurthi
+
+app.post('/api/details', (req, res) => {
+    const { name,location,students,teachers,accreditation,dob } = req.body;
+    const newDetails = { studentId: Details.length + 1,name,location,students,teachers,accreditation,dob };
+    Details.push(newDetails);
+    res.status(201).json(newDetails);
+  });
+
 app.listen(5000, () => {
     console.log("Server Running");
 })
