@@ -194,6 +194,12 @@ app.post('/api/details', (req, res) => {
     Details.push(newDetails);
     res.status(201).json(newDetails);
   });
+  app.delete("/api/details/:id", (req, res) => {
+    const index = Details.findIndex((b) => b.studentId === req.params.id);
+    if (index === -1) return res.status(404).send("Details not found");
+    Details.splice(index, 1);
+    res.send("Detail deleted successfully");
+  });
 
 app.listen(5000, () => {
     console.log("Server Running");
