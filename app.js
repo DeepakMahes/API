@@ -188,19 +188,18 @@ app.get("/api/details", (req, res) => {
 });
 
 app.put("/api/details/:id", (req, res) => {
-  const detail = Details.find((b) => b.studentId == req.params.id);
-  if (detail) {
-    const {name, location, students, teachers, accreditaiton, dob} = req.body;
-    detail.name = name;
-    detail.location = location;
-    detail.students = students;
-    detail.teachers = teachers;
-    detail.accreditation = accreditaiton;
-    detail.dob = dob;
-    res.json(detail);
-  } else {
-    return res.status(404).send("Details not found");
-  }
+  const detail = Details.find((b) => b.studentId === req.params.id);
+  if (!detail) return res.status(404).send("Details not found");
+
+  const {name, location, students, teachers, accreditation, dob} = req.body;
+  detail.name = name;
+  detail.location = location;
+  detail.students = students;
+  detail.teachers = teachers;
+  detail.accreditation = accreditation;
+  detail.dob = dob;
+
+  res.json(detail);
 });
 app.listen(5000, () => {
   console.log("Server Running");
