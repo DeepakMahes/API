@@ -203,6 +203,7 @@ app.post("/api/details", (req, res) => {
 });
 
 app.put("/api/details/:id", (req, res) => {
+//kjkj
   const detail = Details.find((b) => b.studentId === req.params.id);
   if (!detail) return res.status(404).send("Details not found");
 
