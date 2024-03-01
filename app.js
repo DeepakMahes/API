@@ -186,6 +186,16 @@ var Details = [
 app.get("/api/details", (req, res) => {
   res.json(Details);
 });
+app.get("/api/details/:studentId", (req, res) => {
+   
+  const requestedStudentId = req.params.studentId;   
+  const studentDetail = Details.find(detail => detail.studentId === requestedStudentId);
+  if (studentDetail) {
+      res.json(studentDetail);
+  } else {
+      res.status(404).json({ error: "Student ID not found" });
+  }
+});
 
 app.post("/api/details", (req, res) => {
   const {name, location, students, teachers, accreditation, dob} = req.body;
@@ -203,7 +213,7 @@ app.post("/api/details", (req, res) => {
 });
 
 app.put("/api/details/:id", (req, res) => {
-//kjkj
+
   const detail = Details.find((b) => b.studentId === req.params.id);
   if (!detail) return res.status(404).send("Details not found");
 
